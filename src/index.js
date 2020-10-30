@@ -30,18 +30,17 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+    res.locals.applicationName = "Photobooth app";
+    next();
+});
+
 app.use(flash());
 app.use(function (req, res, next) {
-  const flash = req.flash();
-  res.locals.messages =
-    flash.messages && flash.messages.length
-      ? flash.messages.map((m) => JSON.parse(m))
-      : [];
-  res.locals.errors =
-    flash.errors && flash.messages.length
-      ? flash.errors.map((m) => JSON.parse(m))
-      : [];
-  next();
+    const flash = req.flash();
+    res.locals.messages = flash.messages;
+    res.locals.errors = flash.errors;
+    next();
 });
 
 //Inner logic

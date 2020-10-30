@@ -17,26 +17,24 @@ router.get("/", async function (req, res, next) {
 router.post("/", function (req, res, next) {
   const body = req.body;
   console.log(body);
-  const errors = [];
+  let hasError = false;
   if (!body.name) {
-    errors.push({ field: "mood", msg: "Please select a mood" });
+    hasError = true;
+    req.flash("errors", { field: "name", msg: "Please select a name" });
   }
   if (!body.mood) {
-    errors.push({ field: "mood", msg: "Please select a mood" });
+    hasError = true;
+    req.flash("errors", { field: "mood", msg: "Please select a mood" });
   }
-  if (errors.length) {
-    req.flash(
-      "messages",
-      JSON.stringify({ level: "error", msg: "Ooops something went wrong..." })
-    );
-    req.flash("errors", JSON.stringify(errors));
+  if (hasError) {
+    req.flash("messages", {
+      level: "error",
+      msg: "Ooops something went wrong..."
+    });
     res.redirect("/form");
     return;
   }
-  req.flash(
-      "messages",
-      JSON.stringify({ level: "success", msg: "Created" })
-  );
+  req.flash("messages", { level: "success", msg: "Created" });
   res.redirect("/");
 });
 
