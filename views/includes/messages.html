@@ -1,0 +1,7 @@
+{% if messages %}
+    <ul class="c-flash-messages">
+        {% for message in messages %}
+            <li class="c-flash-message__item c-flash-message {{message.level}}">{{ message.msg }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
