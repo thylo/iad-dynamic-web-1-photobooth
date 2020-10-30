@@ -33,15 +33,11 @@ router.post("/", function (req, res, next) {
     res.redirect("/form");
     return;
   }
-  db.insert({ name: body.name, mood: body.mood }, (err, newDoc) => {
-    if (!err) {
-      req.flash(
-        "messages",
-        JSON.stringify({ level: "success", msg: "Created" })
-      );
-      res.redirect("/");
-    }
-  });
+  req.flash(
+      "messages",
+      JSON.stringify({ level: "success", msg: "Created" })
+  );
+  res.redirect("/");
 });
 
 module.exports = router;

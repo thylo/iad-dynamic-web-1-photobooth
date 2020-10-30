@@ -1,8 +1,12 @@
 const path = require("path");
 const Datastore = require("nedb"),
   db = new Datastore({
-    filename: path.join("..", "..", "database.db"),
-    autoload: true
+    filename: path.join("database.db"),
+    autoload: true,
   });
 
-module.exports = Datastore;
+db.find({}, (err, docs) => {
+  console.log(`INFO : There is ${docs.length} docs in database`);
+});
+
+module.exports = db;

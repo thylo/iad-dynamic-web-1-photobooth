@@ -58,5 +58,5 @@ app.use(router);
 configureErrorHandlers(app);
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Photobooth app listening at http://localhost:${port}`);
 });
