@@ -1,0 +1,10 @@
+{% extends "layouts/base.html" %} {% block content %}
+<div class="content">
+   <h1>IAD photobooth Contact</h1>
+   <ul>
+      {% for name in names %}
+      <li>{{name}}</li>
+      {% endfor %}
+   </ul>
+</div>
+{% endblock %}
