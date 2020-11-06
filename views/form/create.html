@@ -1,33 +1,34 @@
 {% extends "layouts/base.html" %} {% block content %}
 <div class="content">
-   <h1>Create a super picture</h1>
-   <form action="/form" method="post">
-      <div class="c-form-control">
-         <label class="c-form-control__label" for="name"
-            >What's your name ?</label
-         >
-         <input
-            type="text"
-            class="c-form-control__input"
-            id="name"
-            name="name"
-            placeholder="John Smith"
-         />
-      </div>
-      <div class="c-form-control">
-         <label class="c-form-control__label" for="name"
-            >What's your mood ?</label
-         >
-         <select class="c-form-control__input" required="true">
-            <option>--Please select--</option>
-            {% for mood in moods %}
-            <option value="{{mood}}">{{mood}}</option>
-            {% endfor %}
-         </select>
-      </div>
-      <div class="c-form-control">
-         <input class="c-button" type="submit" value="send" />
-      </div>
-   </form>
+	 <h1>{{title}}</h1>
+	<form action="/form" method="post">
+		<div class="c-form-control">
+			<label class="c-form-control__label" for="name">What's your name ?</label>
+			<input
+				type="text"
+				class="c-form-control__input"
+				id="name"
+				name="name"
+				placeholder="John Smith"
+			/>
+		</div>
+		<div class="c-form-control">
+			<label class="c-form-control__label" for="mood">What's your mood ?</label>
+			<select
+				class="c-form-control__input"
+				id="mood"
+				name="mood"
+				required="true"
+			>
+				<option>--Please select--</option>
+				{% for mood in moods %}
+				<option value="{{mood}}">{{mood}}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div class="c-form-control">
+			<input class="c-button" type="submit" value="send" />
+		</div>
+	</form>
 </div>
 {% endblock %}
