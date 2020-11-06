@@ -14,13 +14,15 @@
     "errorhandler": "^1.5.1",
     "express": "4.17.1",
     "express-session": "^1.17.1",
+    "gulp": "^4.0.2",
     "nedb": "1.8.0",
     "nunjucks": "3.2.2",
     "prettier": "^2.1.2"
   },
   "devDependencies": {
-    "sass": "^1.28.0",
-    "nodemon": "1.18.4"
+    "gulp-sass": "^4.1.0",
+    "nodemon": "1.18.4",
+    "sass": "^1.28.0"
   },
   "keywords": []
 }
