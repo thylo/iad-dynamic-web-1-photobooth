@@ -1,26 +1,18 @@
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+
 // Define tasks after requiring dependencies
 
 function style() {
-  // Where should gulp look for the sass files?
-
-  // My .sass files are stored in the styles folder
-
-  // (If you want to use scss files, simply look for *.scss files instead)
-
   return (
     gulp
-
-      .src("styles/*.sass")
+      .src("assets/scss/**/*.scss")
 
       // Use sass with the files found, and log any errors
 
       .pipe(sass())
-
       .on("error", sass.logError)
-
-      // What is the destination for the compiled file?
-
-      .pipe(gulp.dest("styles"))
+      .pipe(gulp.dest("public/css"))
   );
 }
 
@@ -30,4 +22,4 @@ function style() {
 
 // $ gulp style
 
-exports.style = style;
+module.exports = style;
