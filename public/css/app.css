@@ -79,3 +79,6 @@ body {
   .c-flash-message.error {
     background: red;
     color: white; }
+  .c-flash-message.success {
+    background: rgb(11, 202, 27);
+    color: white; }
