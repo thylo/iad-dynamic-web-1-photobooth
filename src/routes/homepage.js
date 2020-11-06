@@ -3,9 +3,9 @@ const router = express.Router();
 
 /* GET users listing. */
 router.get("/", async function (req, res, next) {
-    res.render("index.html", {
-        title:'Homepage'
-    });
+   res.render("index.html", {
+      title: "Homepage",
+   });
 });
 
 module.exports = router;

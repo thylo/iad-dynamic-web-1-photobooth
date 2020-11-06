@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <link rel="stylesheet" href="/css/app.css">
-    <title>IAD - {{title}}</title>
-</head>
-<body>
-{% include '../includes/nav.html' %}
-{% include '../includes/messages.html' %}
-<div class="c-container">
-    {% block content %} Default content {% endblock %}
-</div>
-{% block js %}
-<script src="/js/app.js"/>
-{% endblock %}
-</body>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <link rel="stylesheet" href="/css/app.css" />
+      {% if leafletRequired == "true" %}
+      <link
+         rel="stylesheet"
+         href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      />
+      <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+      {% endif %}
+      <title>IAD - {{title}}</title>
+   </head>
+   <body>
+      {% include '../includes/nav.html' %} {% include
+      '../includes/messages.html' %}
+      <div class="c-container">
+         {% block content %} Default content {% endblock %}
+      </div>
+      {% block js %}
+      <script src="/js/app.js" />
+      {% endblock %}
+   </body>
 </html>
