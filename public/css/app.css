@@ -80,6 +80,11 @@ body {
     background: red;
     color: white; }
 
+  .c-flash-message.success {
+    background: rgb(11, 202, 27);
+    color: white; }
+
+
 .selfielist {
   list-style: none;
   padding: 0;
