@@ -1,22 +1,29 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../config/database");
-
 const moods = ["happy", "bored", "sad", "neutral"];
+const multer  = require('multer');
+const upload = multer({dest:'multer'});
+
+
+
+
+
 
 /* GET users listing. */
 router.get("/", async function (req, res, next) {
-  console.log(res.locals);
-  res.render("form/create.html", {
-    title: "Create new selfie",
-    moods,
-    errors: res.locals.errors || [],
-  });
+	console.log(res.locals);
+	res.render("form/create.html", {
+		title: "Create new selfie",
+		moods,
+		errors: res.locals.errors || [],
+	});
 });
 
-router.post("/", function (req, res, next) {
+router.post("/",upload.single('uploaded_file'), function (req, res, next) {
   const body = req.body;
   console.log(body);
+  console.log(req.file);
   let hasError = false;
   if (!body.name) {
     hasError = true;
@@ -26,6 +33,10 @@ router.post("/", function (req, res, next) {
     hasError = true;
     req.flash("errors", { field: "mood", msg: "Please select a mood" });
   }
+  if (!req.file) {
+    hasError = true;
+    req.flash("errors", { field: "selfie", msg: "Please select a selfie" });
+  }
   if (hasError) {
     req.flash("messages", {
       level: "error",
@@ -34,8 +45,32 @@ router.post("/", function (req, res, next) {
     res.redirect("/form");
     return;
   }
-  req.flash("messages", { level: "success", msg: "Created" });
-  res.redirect("/");
+ 
+	//insérer données reçues
+	db.insert(
+		{
+			time: Date.now(),
+			name: req.body.name,
+      mood: req.body.mood,
+      image: req.file,
+		},
+		function (error, data) {
+			if (error) {
+				//si erreur
+				req.flash("messages", {
+					level: "error",
+					msg: "Error: could not save in database, try again",
+				});
+				res.redirect("/form");
+				return;
+			}
+			//si c'est fait, rediriger
+
+			req.flash("messages", { level: "success", msg: "Created" });
+			res.redirect("/");
+		}
+	);
+
 });
 
 module.exports = router;
