@@ -51,7 +51,8 @@ router.post("/",upload.single('uploaded_file'), function (req, res, next) {
 		{
 			time: Date.now(),
 			name: req.body.name,
-			mood: req.body.mood,
+      mood: req.body.mood,
+      image: req.file,
 		},
 		function (error, data) {
 			if (error) {
