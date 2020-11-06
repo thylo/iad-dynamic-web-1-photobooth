@@ -1,8 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../config/database");
-
 const moods = ["happy", "bored", "sad", "neutral"];
+const multer  = require('multer');
+const upload = multer({dest:'multer'});
+
+
+
+
+
 
 /* GET users listing. */
 router.get("/", async function (req, res, next) {
@@ -13,10 +19,10 @@ router.get("/", async function (req, res, next) {
     errors: res.locals.errors || [],
   });
 });
-
-router.post("/", function (req, res, next) {
+router.post("/",upload.single('uploaded_file'), function (req, res, next) {
   const body = req.body;
   console.log(body);
+  console.log(req.file);
   let hasError = false;
   if (!body.name) {
     hasError = true;
@@ -25,6 +31,10 @@ router.post("/", function (req, res, next) {
   if (!body.mood) {
     hasError = true;
     req.flash("errors", { field: "mood", msg: "Please select a mood" });
+  }
+  if (!req.file) {
+    hasError = true;
+    req.flash("errors", { field: "selfie", msg: "Please select a selfie" });
   }
   if (hasError) {
     req.flash("messages", {
