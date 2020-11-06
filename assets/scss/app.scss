@@ -1,97 +1,110 @@
-:root{
-  --container-width: 1024px;
+:root {
+   --container-width: 1024px;
 }
 
-*{
-  box-sizing: border-box;
+* {
+   box-sizing: border-box;
 }
 html,
-body{
-background: #ccc url('/img/email-pattern.png');
-  font-family: helvetica, sans-serif;
+body {
+   background: #ccc url("/img/email-pattern.png");
+   font-family: helvetica, sans-serif;
 }
 
-.c-main-header{
-  max-width: var(--container-width);
-  margin: 2rem auto;
-  display: flex;
-  align-items: center;
-  &__logo{
-    max-width: 10rem;
-  }
-  &__container{
-    flex:1;
-  }
+.c-main-header {
+   max-width: var(--container-width);
+   margin: 2rem auto;
+   display: flex;
+   align-items: center;
+   &__logo {
+      max-width: 10rem;
+   }
+   &__container {
+      flex: 1;
+   }
 }
-.c-nav{
-  &__list{
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    margin: 0;
-    justify-content: flex-end;
-  }
-  &__item{
-    padding: 1rem;
-  }
+.c-nav {
+   &__list {
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      margin: 0;
+      justify-content: flex-end;
+   }
+   &__item {
+      padding: 1rem;
+   }
 }
-.c-nav-link{
-  color: #222;
-  &.active{
-    text-decoration: none;
-    font-weight: bold;
-    color: orangered;
-  }
-}
-
-.c-container{
-  max-width: var(--container-width);
-  border-radius: 1rem;
-  margin:2rem auto;
-  padding:1rem;
-  background: white;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+.c-nav-link {
+   color: #222;
+   &.active {
+      text-decoration: none;
+      font-weight: bold;
+      color: orangered;
+   }
 }
 
-.c-form-control{
-  margin-bottom: 1rem;
-  &__label{
-    display: block;
-    color: #aaa;
-    margin-bottom: 1rem;
-  }
-  &__input{
-    display: block;
-    width: 100%;
-    padding: 1rem .5rem;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    border: 1px solid #aaaaaa;
-    border-radius: 2rem;
-  }
+.c-container {
+   max-width: var(--container-width);
+   border-radius: 1rem;
+   margin: 2rem auto;
+   padding: 1rem;
+   background: white;
+   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
-.c-button{
-  padding: 1rem 2rem;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  background: orangered;
-  color: white;
-  border-radius: 2rem;
-  border: none;
+.c-form-control {
+   margin-bottom: 1rem;
+   &__label {
+      display: block;
+      color: #aaa;
+      margin-bottom: 1rem;
+   }
+   &__input {
+      display: block;
+      width: 100%;
+      padding: 1rem 0.5rem;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      border: 1px solid #aaaaaa;
+      border-radius: 2rem;
+   }
 }
 
-.c-flash-messages{
-  list-style: none;
-  margin: 0;
-  padding:0;
-  &__item{
-    margin-bottom: 1rem;
-  }
+.c-button {
+   padding: 1rem 2rem;
+   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+   background: orangered;
+   color: white;
+   border-radius: 2rem;
+   border: none;
 }
-.c-flash-message{
-  padding: 1rem;
-  border-radius: 1rem;
-  &.error{
-    background: red;
-    color: white;
-  }
+
+.c-flash-messages {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+   &__item {
+      margin-bottom: 1rem;
+   }
+}
+.c-flash-message {
+   padding: 1rem;
+   border-radius: 1rem;
+   &.error {
+      background: red;
+      color: white;
+   }
+}
+
+.selfielist {
+   background-color: aquamarine;
+}
+
+.selfielist__item {
+   background-color: brown;
+}
+
+.selfielist__image {
+   background-color: red;
 }
