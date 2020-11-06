@@ -1,2 +1,4 @@
 /node_modules
+/multer
+/database.db
 .idea
