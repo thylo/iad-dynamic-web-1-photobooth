@@ -53,7 +53,7 @@ body {
   .c-form-control__input {
     display: block;
     width: 100%;
-    padding: 1rem .5rem;
+    padding: 1rem 0.5rem;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
     border: 1px solid #aaaaaa;
     border-radius: 2rem; }
@@ -79,6 +79,52 @@ body {
   .c-flash-message.error {
     background: red;
     color: white; }
+
   .c-flash-message.success {
     background: rgb(11, 202, 27);
     color: white; }
+
+
+.selfielist {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px; }
+
+.selfielist__item {
+  height: 360px;
+  border-radius: 6px;
+  box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.1s ease-in-out;
+  cursor: pointer; }
+
+.selfielist__link {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: black; }
+
+.selfielist__item:hover {
+  transform: scale(1.02);
+  box-shadow: 2px 2px 6px 2px rgba(0, 0, 0, 0.05); }
+
+.selfielist__image {
+  width: 100%;
+  height: calc(100% - 60px);
+  object-fit: cover;
+  border-radius: 6px 6px 0 0; }
+
+.selfielist__textsection {
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly; }
+
+.textsection__name {
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  padding: 0; }
