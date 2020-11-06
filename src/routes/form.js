@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const db = require("../config/database");
 
-const moods = ["happy", "bored", "sad", "neutral"];
+
+const moods = [{label:"je pète la forme", value: "happy"},{label:"c'est l'ennui", value: "bored"},{label:"je suis tristesse", value: "sad"},{label:"c'est ok", value: "neutral"}];
 
 /* GET users listing. */
 router.get("/", async function (req, res, next) {

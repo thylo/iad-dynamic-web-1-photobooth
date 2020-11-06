@@ -22,7 +22,9 @@
 			>
 				<option>--Please select--</option>
 				{% for mood in moods %}
-				<option value="{{mood}}">{{mood}}</option>
+				<option value="{{mood.value}}">{{mood.label}}</option>
+
+				<!-- value="{{mood}}">{{mood}} -->
 				{% endfor %}
 			</select>
 		</div>
