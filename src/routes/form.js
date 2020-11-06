@@ -12,13 +12,14 @@ const upload = multer({dest:'multer'});
 
 /* GET users listing. */
 router.get("/", async function (req, res, next) {
-  console.log(res.locals);
-  res.render("form/create.html", {
-    title: "Create new selfie",
-    moods,
-    errors: res.locals.errors || [],
-  });
+	console.log(res.locals);
+	res.render("form/create.html", {
+		title: "Create new selfie",
+		moods,
+		errors: res.locals.errors || [],
+	});
 });
+
 router.post("/",upload.single('uploaded_file'), function (req, res, next) {
   const body = req.body;
   console.log(body);
@@ -44,8 +45,31 @@ router.post("/",upload.single('uploaded_file'), function (req, res, next) {
     res.redirect("/form");
     return;
   }
-  req.flash("messages", { level: "success", msg: "Created" });
-  res.redirect("/");
+ 
+	//insérer données reçues
+	db.insert(
+		{
+			time: Date.now(),
+			name: req.body.name,
+			mood: req.body.mood,
+		},
+		function (error, data) {
+			if (error) {
+				//si erreur
+				req.flash("messages", {
+					level: "error",
+					msg: "Error: could not save in database, try again",
+				});
+				res.redirect("/form");
+				return;
+			}
+			//si c'est fait, rediriger
+
+			req.flash("messages", { level: "success", msg: "Created" });
+			res.redirect("/");
+		}
+	);
+
 });
 
 module.exports = router;
