@@ -1,8 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../config/database");
-
 const moods = ["happy", "bored", "sad", "neutral"];
+const multer  = require('multer');
+const upload = multer({dest:'multer'});
+
+
+
+
+
 
 /* GET users listing. */
 router.get("/", async function (req, res, next) {
@@ -14,33 +20,39 @@ router.get("/", async function (req, res, next) {
 	});
 });
 
-router.post("/", function (req, res, next) {
-	const body = req.body;
-	console.log(body);
-	let hasError = false;
-	if (!body.name) {
-		hasError = true;
-		req.flash("errors", { field: "name", msg: "Please select a name" });
-	}
-	if (!body.mood) {
-		hasError = true;
-		req.flash("errors", { field: "mood", msg: "Please select a mood" });
-	}
-	if (hasError) {
-		req.flash("messages", {
-			level: "error",
-			msg: "Ooops something went wrong...",
-		});
-		res.redirect("/form");
-		return;
-	}
-
+router.post("/",upload.single('uploaded_file'), function (req, res, next) {
+  const body = req.body;
+  console.log(body);
+  console.log(req.file);
+  let hasError = false;
+  if (!body.name) {
+    hasError = true;
+    req.flash("errors", { field: "name", msg: "Please select a name" });
+  }
+  if (!body.mood) {
+    hasError = true;
+    req.flash("errors", { field: "mood", msg: "Please select a mood" });
+  }
+  if (!req.file) {
+    hasError = true;
+    req.flash("errors", { field: "selfie", msg: "Please select a selfie" });
+  }
+  if (hasError) {
+    req.flash("messages", {
+      level: "error",
+      msg: "Ooops something went wrong..."
+    });
+    res.redirect("/form");
+    return;
+  }
+ 
 	//insérer données reçues
 	db.insert(
 		{
 			time: Date.now(),
 			name: req.body.name,
-			mood: req.body.mood,
+      mood: req.body.mood,
+      image: req.file,
 		},
 		function (error, data) {
 			if (error) {
@@ -58,6 +70,7 @@ router.post("/", function (req, res, next) {
 			res.redirect("/");
 		}
 	);
+
 });
 
 module.exports = router;
