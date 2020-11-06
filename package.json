@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon src/index.js",
-    "watch": "gulp watch"
+    "watch": "gulp watch",
+    "server": "npm run start && npm run watch"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

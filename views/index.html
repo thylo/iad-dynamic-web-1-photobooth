@@ -1,59 +1,19 @@
 {% extends "layouts/base.html" %} {% block content %}
 
-<style>
-   .selfielist {
-      background-color: aquamarine;
-      list-style: none;
-      padding: 0;
-
-      display: grid;
-      grid-template-columns: repeat(4, 100px);
-      gap: 10px;
-   }
-
-   .selfielist__item {
-      background-color: brown;
-      max-height: 200px;
-   }
-
-   .selfielist__image {
-      background-color: red;
-      max-height: 100%;
-      max-width: 100%;
-   }
-</style>
 <div class="content">
    <h1>IAD photobooth</h1>
 
    <ul class="selfielist">
+      {% for data in selfieData %}
       <li class="selfielist__item">
-         <img
-            class="selfielist__image"
-            src="https://picsum.photos/id/100/100/400"
-            alt=""
-         />
+         <a class="selfielist__link" href="{{data[2]}}">
+            <img class="selfielist__image" src="{{data[1]}}" alt="" />
+            <div class="selfielist__textsection">
+               <p class="textsection__name">{{data[0]}}</p>
+            </div>
+         </a>
       </li>
-      <li class="selfielist__item">
-         <img
-            class="selfielist__image"
-            src="https://picsum.photos/id/100/200/300"
-            alt=""
-         />
-      </li>
-      <li class="selfielist__item">
-         <img
-            class="selfielist__image"
-            src="https://picsum.photos/id/100/200/200"
-            alt=""
-         />
-      </li>
-      <li class="selfielist__item">
-         <img
-            class="selfielist__image"
-            src="https://picsum.photos/id/100/400/300"
-            alt=""
-         />
-      </li>
+      {% endfor %}
    </ul>
 </div>
 {% endblock %}
