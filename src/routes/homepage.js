@@ -1,15 +1,28 @@
 const express = require("express");
 const router = express.Router();
+const db = require("../config/database");
 
 /* GET users listing. */
 router.get("/", async function (req, res, next) {
-   res.render("index.html", {
-      title: "Homepage",
-      selfieData: [
-         ["raph", "https://picsum.photos/id/100/100/100", "#1",],
-         ["robin", "https://picsum.photos/id/102/200/100", "#2",],
-         ["hugo", "https://picsum.photos/id/104/100/200", "#3",],
-      ],
+   data = [];
+   db.find({}, function (err, docs) {
+      if (err == null) {
+         docs.forEach((entry) => {
+            curObj = {
+               name: entry["name"],
+               imageUrl: entry["image"]["path"],
+               anchorLink: "#",
+            };
+            data.push(curObj);
+         });
+
+         res.render("index.html", {
+            title: "Homepage",
+            selfieData: JSON.stringify({
+               contacts: data,
+            }),
+         });
+      }
    });
 });
 
