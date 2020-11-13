@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../config/database");
 
-const moods = ["happy", "excited", "neutral", "angry", "bored", "sad"];
+
 const multer = require("multer");
 const path = require("path");
 
@@ -23,6 +23,7 @@ const fileFilter = (req, file, cb) => {
 	}
 };
 
+const moods = [{label:"je pète la forme", value: "happy"},{label:"c'est l'ennui", value: "bored"},{label:"je suis tristesse", value: "sad"},{label:"c'est ok", value: "neutral"}];
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 /* GET users listing. */
