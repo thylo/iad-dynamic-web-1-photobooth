@@ -1,41 +1,29 @@
 {% extends "layouts/base.html" %} {% block content %}
 
 <div class="content">
-   <h1>IAD photobooth</h1>
+  <h1>Homepage - {{title}}</h1>
 
-   <ul class="selfielist"></ul>
+  <form action="/list">
+    <select class="c-form-control__input" id="mood" name="mood" required="true">
+      <option>--Please select--</option>
+      {% for mood in moods %}
+      <option value="{{mood.value}}">{{mood.label}}</option>
+      {% endfor %}
+    </select>
+    <input type="submit" value="Filtrer" />
+  </form>
+
+  <ul class="selfielist">
+    {% for selfie in selfies %}
+    <li>
+      <h2>{{selfie.name}}</h2>
+      <a href="/selfies/{{selfie._id}}">
+        <img src="{{selfie.imageUrl}}" alt="{{selfie.name}}" style="width:100px"/>
+        {{selfie.mood}}
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
 </div>
-
-<script>
-   var data = {{selfieData|safe}};
-
-   data.contacts.forEach((contact) => {
-      var ul = document.querySelector(".selfielist");
-
-      var li = document.createElement("li");
-      li.classList.add("selfielist__item");
-      ul.appendChild(li);
-
-      var a = document.createElement("a");
-      a.classList.add("selfielist__link");
-      a.setAttribute("href",contact.anchorLink);
-      li.appendChild(a);
-
-      var img = document.createElement("img");
-      img.classList.add("selfielist__image");
-      img.setAttribute("src",contact.imageUrl);
-      img.setAttribute("alt","selfie from " + contact.name);
-      a.appendChild(img);
-
-      var div = document.createElement("div");
-      div.classList.add("selfielist__textsection");
-      a.appendChild(div);
-
-      var p = document.createElement("p");
-      p.classList.add("textsection__name");
-      p.innerText = contact.name;
-      div.appendChild(p);
-   });
-</script>
 
 {% endblock %}

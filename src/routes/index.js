@@ -7,6 +7,8 @@ const homepageRouter = require("./homepage");
 const aboutRouter = require("./about");
 const db = require("../config/database");
 
+const moods = require("../config/moods.json");
+
 const routeName = (name) => (req, res, next) => {
   res.locals.routename = name;
   next();
@@ -27,4 +29,22 @@ router.use("/selfies/:selfieId", (req, res) => {
     res.render("selfie.html", { doc });
   });
 });
+
+router.use("/list", (req, res)=>{
+  const mood= req.query.mood;
+  const filter = mood ? {mood} : {};
+  const title = mood ? `Resultats pour : ${mood}` : 'Tout les selfies';
+  db.find(filter, (error, docs) => {
+    if (error) {
+      res.send("il y a une erreur");
+      return;
+    }
+    const selfies = docs.map((doc) => ({
+      ...doc,
+      imageUrl: doc.image.path,
+    }));
+
+    res.render('list.html',{title,selfies, moods, mood})
+  });
+})
 module.exports = router;

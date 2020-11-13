@@ -42,7 +42,6 @@ app.use(function (req, res, next) {
    res.locals.errors = flash.errors;
    next();
 });
-
 //Inner logic
 app.use(
    bodyParser.urlencoded({

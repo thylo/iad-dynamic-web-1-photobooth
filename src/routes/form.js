@@ -23,7 +23,7 @@ const fileFilter = (req, file, cb) => {
 	}
 };
 
-const moods = [{label:"je pète la forme", value: "happy"},{label:"c'est l'ennui", value: "bored"},{label:"je suis tristesse", value: "sad"},{label:"c'est ok", value: "neutral"}];
+const moods = require('../config/moods.json');
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 /* GET users listing. */
