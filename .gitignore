@@ -1,5 +1,5 @@
 /node_modules
 /multer
-/uploads
+/uploads/*
 /database.db
 .idea
