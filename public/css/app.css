@@ -15,7 +15,8 @@ body {
   display: flex;
   align-items: center; }
   .c-main-header__logo {
-    max-width: 10rem; }
+    max-width: 10rem; 
+    width: 100%; }
   .c-main-header__container {
     flex: 1; }
 
