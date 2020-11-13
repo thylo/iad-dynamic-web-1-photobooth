@@ -1,12 +1,7 @@
 {% extends "layouts/base.html" %} {% block content %}
 <div class="content">
-<<<<<<< HEAD
 	<h1>{{title}}</h1>
-	<form action="/form" method="post" id="geolocform">
-=======
-	 <h1>{{title}}</h1>
-	<form action="/form" method="post" enctype="multipart/form-data">
->>>>>>> origin/015_suite
+	<form action="/form" method="post" id="geolocform" enctype="multipart/form-data">
 		<div class="c-form-control">
 			<label class="c-form-control__label" for="name">What's your name ?</label>
 			<input

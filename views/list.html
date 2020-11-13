@@ -1,0 +1,25 @@
+{% extends "layouts/base.html" %} {% block content %}
+<div class="content">
+	<ul id="list"></ul>
+
+	<script>
+		const list = document.querySelector("#list");
+		async function getList() {
+			const reponse = await fetch("/api", {
+				method: "GET",
+				headers: {
+					Accept: "application/json",
+					"Content-Type": "application/json",
+				},
+			});
+			const data = await reponse.json();
+			data.forEach((element) => {
+				const listElement = document.createElement("li");
+				listElement.textContent = element.emotion;
+				list.appendChild(listElement);
+			});
+		}
+		getList();
+	</script>
+</div>
+{% endblock %}
