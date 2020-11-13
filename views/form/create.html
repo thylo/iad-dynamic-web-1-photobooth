@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %} {% block content %}
 <div class="content">
 	 <h1>{{title}}</h1>
-	<form action="/form" method="post">
+	<form action="/form" method="post" enctype="multipart/form-data">
 		<div class="c-form-control">
 			<label class="c-form-control__label" for="name">What's your name ?</label>
 			<input
@@ -27,6 +27,17 @@
 				<!-- value="{{mood}}">{{mood}} -->
 				{% endfor %}
 			</select>
+		<div class="c-form-control">
+			<label class="c-form-control__label" for="selfie">Select a selfie</label>
+			<input 
+				type="file"
+				class="c-form-control__input"
+				id="selfie"
+				name="uploaded_file"
+				required="true"
+			
+				
+			>
 		</div>
 		<div class="c-form-control">
 			<input class="c-button" type="submit" value="send" />

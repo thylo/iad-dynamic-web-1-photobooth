@@ -15,10 +15,11 @@
       <title>IAD - {{title}}</title>
    </head>
    <body>
-      {% include '../includes/nav.html' %} {% include
-      '../includes/messages.html' %}
+      {% include '../includes/nav.html' %} 
+      
       <div class="c-container">
-         {% block content %} Default content {% endblock %}
+        {% include '../includes/messages.html' %}           
+        {% block content %} Default content {% endblock %}
       </div>
       {% block js %}
       <script src="/js/app.js" />
