@@ -3,17 +3,39 @@
 <div class="content">
    <h1>IAD photobooth</h1>
 
-   <ul class="selfielist">
-      {% for data in selfieData %}
-      <li class="selfielist__item">
-         <a class="selfielist__link" href="{{data[2]}}">
-            <img class="selfielist__image" src="{{data[1]}}" alt="" />
-            <div class="selfielist__textsection">
-               <p class="textsection__name">{{data[0]}}</p>
-            </div>
-         </a>
-      </li>
-      {% endfor %}
-   </ul>
+   <ul class="selfielist"></ul>
 </div>
+
+<script>
+   var data = {{selfieData|safe}};
+
+   data.contacts.forEach((contact) => {
+      var ul = document.querySelector(".selfielist");
+
+      var li = document.createElement("li");
+      li.classList.add("selfielist__item");
+      ul.appendChild(li);
+
+      var a = document.createElement("a");
+      a.classList.add("selfielist__link");
+      a.setAttribute("href",contact.anchorLink);
+      li.appendChild(a);
+
+      var img = document.createElement("img");
+      img.classList.add("selfielist__image");
+      img.setAttribute("src",contact.imageUrl);
+      img.setAttribute("alt","selfie from " + contact.name);
+      a.appendChild(img);
+
+      var div = document.createElement("div");
+      div.classList.add("selfielist__textsection");
+      a.appendChild(div);
+
+      var p = document.createElement("p");
+      p.classList.add("textsection__name");
+      p.innerText = contact.name;
+      div.appendChild(p);
+   });
+</script>
+
 {% endblock %}
