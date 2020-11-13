@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../config/database");
 
-const moods = ["happy", "bored", "sad", "neutral"];
+const moods = ["happy", "excited", "neutral", "angry", "bored", "sad"];
 
 /* GET users listing. */
 router.get("/", async function (req, res, next) {
@@ -26,6 +26,10 @@ router.post("/", function (req, res, next) {
 		hasError = true;
 		req.flash("errors", { field: "mood", msg: "Please select a mood" });
 	}
+	if (!body.lat || !body.lon) {
+		hasError = true;
+		req.flash("errors", { field: "lat", msg: "Please input a position" });
+	}
 	if (hasError) {
 		req.flash("messages", {
 			level: "error",
@@ -38,7 +42,12 @@ router.post("/", function (req, res, next) {
 	//insérer données reçues
 	db.insert(
 		{
-			time: Date.now(),
+			time: Date.now(), //optional
+
+			position: {
+				lat: req.body.lat,
+				lon: req.body.lon,
+			},
 			name: req.body.name,
 			mood: req.body.mood,
 		},
