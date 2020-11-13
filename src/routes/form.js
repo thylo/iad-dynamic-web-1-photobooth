@@ -3,6 +3,27 @@ const router = express.Router();
 const db = require("../config/database");
 
 const moods = ["happy", "excited", "neutral", "angry", "bored", "sad"];
+const multer = require("multer");
+const path = require("path");
+
+const storage = multer.diskStorage({
+	destination: (req, file, cb) => {
+		cb(null, "uploads");
+	},
+	filename: (req, file, cb) => {
+		console.log(file);
+		cb(null, Date.now() + path.extname(file.originalname));
+	},
+});
+const fileFilter = (req, file, cb) => {
+	if (file.mimetype == "image/jpeg" || file.mimetype == "image/png") {
+		cb(null, true);
+	} else {
+		cb(null, false);
+	}
+};
+
+const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 /* GET users listing. */
 router.get("/", async function (req, res, next) {
@@ -14,9 +35,10 @@ router.get("/", async function (req, res, next) {
 	});
 });
 
-router.post("/", function (req, res, next) {
+router.post("/", upload.single("uploaded_file"), function (req, res, next) {
 	const body = req.body;
 	console.log(body);
+	console.log(req.file);
 	let hasError = false;
 	if (!body.name) {
 		hasError = true;
@@ -29,6 +51,10 @@ router.post("/", function (req, res, next) {
 	if (!body.lat || !body.lon) {
 		hasError = true;
 		req.flash("errors", { field: "lat", msg: "Please input a position" });
+	}
+	if (!req.file) {
+		hasError = true;
+		req.flash("errors", { field: "selfie", msg: "Please select a selfie" });
 	}
 	if (hasError) {
 		req.flash("messages", {
@@ -50,6 +76,7 @@ router.post("/", function (req, res, next) {
 			},
 			name: req.body.name,
 			mood: req.body.mood,
+			image: req.file,
 		},
 		function (error, data) {
 			if (error) {
