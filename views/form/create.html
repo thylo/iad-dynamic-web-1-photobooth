@@ -1,101 +1,116 @@
 {% extends "layouts/base.html" %} {% block content %}
 <div class="content">
-	<h1>{{title}}</h1>
-	<form action="/form" method="post" id="geolocform" enctype="multipart/form-data">
-		<div class="c-form-control">
-			<label class="c-form-control__label" for="name">What's your name ?</label>
-			<input
-				type="text"
-				class="c-form-control__input"
-				id="name"
-				name="name"
-				placeholder="John Smith"
-				required="true"
-			/>
-		</div>
-		<div class="c-form-control">
-			<label class="c-form-control__label" for="mood">What's your mood ?</label>
-			<select
-				class="c-form-control__input"
-				id="mood"
-				name="mood"
-				required="true"
-			>
-				<option>--Please select--</option>
-				{% for mood in moods %}
-				<option value="{{mood.value}}">{{mood.label}}</option>
+   <h1>{{title}}</h1>
+   <form
+      action="/form"
+      method="post"
+      id="geolocform"
+      enctype="multipart/form-data"
+   >
+      <div class="c-form-control">
+         <label class="c-form-control__label" for="name"
+            >What's your name ?</label
+         >
+         <input
+            type="text"
+            class="c-form-control__input"
+            id="name"
+            name="name"
+            placeholder="John Smith"
+            required="true"
+         />
+      </div>
+      <div class="c-form-control">
+         <label class="c-form-control__label" for="mood"
+            >What's your mood ?</label
+         >
+         <select
+            class="c-form-control__input"
+            id="mood"
+            name="mood"
+            required="true"
+         >
+            <option>--Please select--</option>
+            {% for mood in moods %}
+            <option value="{{mood.value}}">{{mood.label}}</option>
 
-				<!-- value="{{mood}}">{{mood}} -->
-				{% endfor %}
-			</select>
-		<div class="c-form-control">
-			<label class="c-form-control__label" for="selfie">Select a selfie</label>
-			<input 
-				type="file"
-				class="c-form-control__input"
-				id="selfie"
-				name="uploaded_file"
-				required="true"
-			
-				
-			>
-		</div>
-		<div class="c-form-control">
-			<label class="c-form-control__label" for="pos"
-				>What's your position ?</label
-			>
-			<input
-				type="text"
-				class="c-form-control__input"
-				id="lat"
-				name="lat"
-				placeholder="40.44"
-				required="true"
-			/>
-			<input
-				type="text"
-				class="c-form-control__input"
-				id="lon"
-				name="lon"
-				placeholder="40.44"
-				required="true"
-			/>
-			<button class="c-button" id="find-me">Geolocate me!</button>
-		</div>
-		<div class="c-form-control">
-			<input class="c-button" type="submit" value="send" />
-		</div>
-	</form>
+            <!-- value="{{mood}}">{{mood}} -->
+            {% endfor %}
+         </select>
+      </div>
+      <div class="c-form-control">
+         <label class="c-form-control__label" for="selfie"
+            >Select a selfie</label
+         >
+         <input
+            type="file"
+            class="c-form-control__input"
+            id="selfie"
+            name="uploaded_file"
+            required="true"
+         />
+      </div>
+      <div class="c-form-control">
+         <label class="c-form-control__label" for="pos"
+            >What's your position ?</label
+         >
+
+         <div class="c-form-control__infogeoloc">
+            <button class="c-button" id="find-me">Geolocate me!</button>
+            <label class="c-form-control__label" for="lat">Latitude :</label>
+            <input
+               type="text"
+               class="c-form-control__input"
+               id="lat"
+               name="lat"
+               placeholder="40.44"
+               required="true"
+            />
+            <label class="c-form-control__label" for="lon">Longitude :</label>
+            <input
+               type="text"
+               class="c-form-control__input"
+               id="lon"
+               name="lon"
+               placeholder="40.44"
+               required="true"
+            />
+         </div>
+      </div>
+      <div class="c-form-control">
+         <input class="c-button" type="submit" value="send" />
+      </div>
+   </form>
 </div>
 <script>
-	function geoFindMe(event) {
-		document.getElementById("find-me").textContent = "One moment please...";
-		event.preventDefault();
+   function geoFindMe(event) {
+      document.getElementById("find-me").textContent = "One moment please...";
+      event.preventDefault();
 
-		console.log("submit");
+      console.log("submit");
 
-		function success(position) {
-			const latitude = position.coords.latitude;
-			const longitude = position.coords.longitude;
+      function success(position) {
+         const latitude = position.coords.latitude;
+         const longitude = position.coords.longitude;
 
-			document.getElementById("lat").value = latitude;
-			document.getElementById("lon").value = longitude;
+         document.getElementById("lat").value = latitude;
+         document.getElementById("lon").value = longitude;
 
-			document.getElementById("find-me").textContent = "Geolocate me!";
-		}
+         document.getElementById("find-me").textContent = "Geolocate me!";
+      }
 
-		function error() {
-			status.textContent = "Unable to retrieve your location";
-		}
+      function error() {
+         status.textContent = "Unable to retrieve your location";
+      }
 
-		if (!navigator.geolocation) {
-			status.textContent = "Geolocation is not supported by your browser";
-		} else {
-			status.textContent = "Locating…";
-			navigator.geolocation.getCurrentPosition(success, error);
-		}
-	}
+      if (!navigator.geolocation) {
+         status.textContent = "Geolocation is not supported by your browser";
+      } else {
+         status.textContent = "Locating…";
+         navigator.geolocation.getCurrentPosition(success, error);
+      }
+   }
 
-	document.querySelector("#find-me").addEventListener("click", geoFindMe);
+   document.querySelector("#find-me").addEventListener("click", geoFindMe);
 </script>
 {% endblock %}

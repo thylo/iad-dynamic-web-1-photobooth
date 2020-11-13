@@ -18,9 +18,11 @@ body {
    display: flex;
    align-items: center;
 }
+
 .c-main-header__logo {
    max-width: 10rem;
 }
+
 .c-main-header__container {
    flex: 1;
 }
