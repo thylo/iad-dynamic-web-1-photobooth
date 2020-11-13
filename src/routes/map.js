@@ -12,8 +12,8 @@ router.get("/", async function (req, res, next) {
             curObj = {
                name: entry["name"],
                imageUrl: entry["image"]["path"],
-               lat: 50,
-               lon: 0,
+               lat: entry["position"]["lat"],
+               lon: entry["position"]["lon"],
                emotion: entry["mood"],
             };
             data.push(curObj);
